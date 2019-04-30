@@ -9,11 +9,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      masterPostList: [],
+      masterPostList: []
     };
     this.handleAddingNewPostToList = this.handleAddingNewPostToList.bind(this);
     this.handleAddNewLike = this.handleAddNewLike.bind(this);
     this.handleAddNewDislike = this.handleAddNewDislike.bind(this);
+    this.sortByLikes = this.sortByLikes.bind(this);
   }
 
   handleAddingNewPostToList(newPost) {
@@ -34,11 +35,29 @@ class App extends Component {
     let newPostList = this.state.masterPostList.slice();
     newPostList[this.findIndex(id)].likes++;
     this.setState({ masterPostList: newPostList });
+    this.sortByLikes();
   }
 
   handleAddNewDislike(id) {
     let newPostList = this.state.masterPostList.slice();
     newPostList[this.findIndex(id)].likes--;
+    this.setState({ masterPostList: newPostList });
+    this.sortByLikes();
+  }
+
+  sortByLikes() {
+    let newPostList = this.state.masterPostList.slice();
+    for (let i = 0; i < newPostList.length; i++) {
+      for (let j = 0; j < newPostList.length - 1; j++) {
+        if (newPostList[j].likes < newPostList[j + 1].likes) {
+          let temp = newPostList[j].likes;
+          newPostList[j].likes = newPostList[j + 1].likes;
+          newPostList[j + 1].likes = temp;
+        }
+      }
+    }
+    console.log(newPostList);
+
     this.setState({ masterPostList: newPostList });
   }
 
