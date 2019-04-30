@@ -12,7 +12,9 @@ function Feed(props) {
 
       `}</style>
       {props.postList.map((post) =>
-        <Post onClickLike={props.onClickLike}
+        <Post
+          onClickLike={props.onClickLike}
+          onClickDislike={props.onClickDislike}
           post={post}
           key={post.id} />
       )}
@@ -22,7 +24,8 @@ function Feed(props) {
 
 Feed.propTypes = {
   postList: PropTypes.array,
-  onClickLike: PropTypes.func
+  onClickLike: PropTypes.func,
+  onClickDislike: PropTypes.func
 };
 
 

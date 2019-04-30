@@ -6,8 +6,11 @@ function Post(props) {
     function onClickLikeSubmission(event) {
         event.preventDefault();
         props.onClickLike(props.post.id);
-        console.log(props.post);
+    }
 
+    function onClickDislikeSubmission(event) {
+        event.preventDefault();
+        props.onClickDislike(props.post.id);
     }
 
     return (
@@ -25,6 +28,7 @@ function Post(props) {
             <h4>{props.post.likes}</h4>
 
             <button onClick={onClickLikeSubmission}>Like</button>
+            <button onClick={onClickDislikeSubmission}>Dislike</button>
         </div>
     );
 }
@@ -34,7 +38,8 @@ Post.propTypes = {
     text: PropTypes.string,
     likes: PropTypes.number,
 
-    onClickLike: PropTypes.func
+    onClickLike: PropTypes.func,
+    onClickDislike: PropTypes.func
 }
 
 export default Post;
