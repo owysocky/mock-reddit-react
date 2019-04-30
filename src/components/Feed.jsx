@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 
 
 function Feed(props) {
+
+
   return (
-
-
     <div>
-      <h1>Feed Works</h1>
+      <style>{`
+
+      `}</style>
       {props.postList.map((post) =>
-        <Post name={post.name}
-          text={post.text}
-          likes={post.likes}
+        <Post onClickLike={props.onClickLike}
+          post={post}
           key={post.id} />
       )}
     </div>
@@ -20,7 +21,8 @@ function Feed(props) {
 }
 
 Feed.propTypes = {
-  postList: PropTypes.array
+  postList: PropTypes.array,
+  onClickLike: PropTypes.func
 };
 
 

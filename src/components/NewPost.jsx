@@ -10,7 +10,7 @@ function NewPost(props) {
 
   function handleNewPostSubmisson(event) {
     event.preventDefault();
-    props.onNewPostCreation({ name: _name.value, text: _text.value, id: v4() });
+    props.onNewPostCreation({ name: _name.value, text: _text.value, likes: 0, id: v4() });
     _name.value = '';
     _text.value = '';
   }

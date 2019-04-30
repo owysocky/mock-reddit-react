@@ -9,18 +9,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      masterPostList: []
+      masterPostList: [],
     };
     this.handleAddingNewPostToList = this.handleAddingNewPostToList.bind(this);
+    this.handleAddNewLike = this.handleAddNewLike.bind(this);
   }
 
   handleAddingNewPostToList(newPost) {
     var list = this.state.masterPostList.slice();
     list.push(newPost);
     this.setState({ masterPostList: list });
-    setTimeout(() => {
+  }
 
-    })
+  findPost(id) {
+    for (var i = 0; i < this.state.masterPostList.length; i++) {
+      if (id == this.state.masterPostList[i].id) {
+        return i;
+      }
+    }
+  }
+
+  handleAddNewLike(id) {
+    let newPostList = this.state.masterPostList.slice();
+    let post = newPostList[this.findPost(id)];
+    post.likes++;
+    newPostList.splice(this.findPost(id), 1, post);
+    this.setState({ masterPostList: newPostList });
   }
 
   render() {
@@ -28,7 +42,7 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' render={() => <Feed postList={this.state.masterPostList} />} />
+          <Route exact path='/' render={() => <Feed onClickLike={this.handleAddNewLike} postList={this.state.masterPostList} />} />
           <Route path='/newpost' render={() => <NewPost onNewPostCreation={this.handleAddingNewPostToList} />} />
           <Route component={Error404} />
         </Switch>
