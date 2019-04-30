@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   handleAddingNewPostToList(newPost) {
-    let list = masterPostlist.slice();
+    let list = this.state.masterPostlist.slice();
     list.push(newPost);
     this.setState({ masterPostlist: list });
   }
@@ -24,7 +24,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path='/' component={Feed} />
-          <Route path='/newpost' component={NewPost} />
+          <Route path='/newpost' render={() => <NewPost onNewPostCreation={this.handleAddingNewPostToList} />} />
           <Route component={Error404} />
         </Switch>
       </div>
@@ -33,3 +33,5 @@ class App extends Component {
 }
 
 export default App;
+
+
