@@ -21,7 +21,7 @@ class App extends Component {
     this.setState({ masterPostList: list });
   }
 
-  findPost(id) {
+  findIndex(id) {
     for (var i = 0; i < this.state.masterPostList.length; i++) {
       if (id == this.state.masterPostList[i].id) {
         return i;
@@ -31,9 +31,7 @@ class App extends Component {
 
   handleAddNewLike(id) {
     let newPostList = this.state.masterPostList.slice();
-    let post = newPostList[this.findPost(id)];
-    post.likes++;
-    newPostList.splice(this.findPost(id), 1, post);
+    newPostList[this.findIndex(id)].likes++;
     this.setState({ masterPostList: newPostList });
   }
 
