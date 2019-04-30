@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { v4 } from 'uuid';
+import { v4 } from 'uuid';
 
 
-function NewPost() {
+function NewPost(props) {
 
   let _name = null;
   let _text = null;
 
   function handleNewPostSubmisson(event) {
     event.preventDefault();
-    props.onNewPostCreation({ name: _name.value, text: _text.value });
+    props.onNewPostCreation({ name: _name.value, text: _text.value, id: v4() });
     _name.value = '';
     _text.value = '';
   }
@@ -30,11 +30,11 @@ function NewPost() {
           placeholder='name'
           ref={(input) => { _name = input; }} />
         <br />
-        <input
+        <textarea
           type='text'
           id='text'
           placeholder='text'
-          ref={(input) => { _text = input; }} />
+          ref={(textarea) => { _text = textarea; }} />
         <br />
         <button type='submit'>Post</button>
       </form>

@@ -8,14 +8,19 @@ import NewPost from "./NewPost";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { masterPostlist: [] };
+    this.state = {
+      masterPostList: []
+    };
     this.handleAddingNewPostToList = this.handleAddingNewPostToList.bind(this);
   }
 
   handleAddingNewPostToList(newPost) {
-    let list = this.state.masterPostlist.slice();
+    var list = this.state.masterPostList.slice();
     list.push(newPost);
-    this.setState({ masterPostlist: list });
+    this.setState({ masterPostList: list });
+    setTimeout(() => {
+
+    })
   }
 
   render() {
@@ -23,7 +28,7 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' component={Feed} />
+          <Route exact path='/' render={() => <Feed postList={this.state.masterPostList} />} />
           <Route path='/newpost' render={() => <NewPost onNewPostCreation={this.handleAddingNewPostToList} />} />
           <Route component={Error404} />
         </Switch>

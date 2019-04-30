@@ -1,16 +1,15 @@
 import React from 'react';
 import Post from './Post';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 
-function Feed() {
-  let postList = [];
+function Feed(props) {
   return (
 
 
     <div>
       <h1>Feed Works</h1>
-      {postList.map((post) =>
+      {props.postList.map((post) =>
         <Post name={post.name}
           text={post.text}
           likes={post.likes}
@@ -19,6 +18,10 @@ function Feed() {
     </div>
   );
 }
+
+Feed.propTypes = {
+  postList: PropTypes.array
+};
 
 
 export default Feed;
