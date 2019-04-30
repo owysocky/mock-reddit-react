@@ -15,6 +15,7 @@ class App extends Component {
     this.handleAddNewLike = this.handleAddNewLike.bind(this);
     this.handleAddNewDislike = this.handleAddNewDislike.bind(this);
     this.sortByLikes = this.sortByLikes.bind(this);
+    this.setColor = this.setColor.bind(this);
   }
 
   handleAddingNewPostToList(newPost) {
@@ -36,6 +37,7 @@ class App extends Component {
     newPostList[this.findIndex(id)].likes++;
     this.setState({ masterPostList: newPostList });
     this.sortByLikes();
+    this.setColor();
   }
 
   handleAddNewDislike(id) {
@@ -43,30 +45,44 @@ class App extends Component {
     newPostList[this.findIndex(id)].likes--;
     this.setState({ masterPostList: newPostList });
     this.sortByLikes();
+    this.setColor();
   }
+
 
   sortByLikes() {
     let newPostList = this.state.masterPostList.slice();
     for (let i = 0; i < newPostList.length; i++) {
       for (let j = 0; j < newPostList.length - 1; j++) {
         if (newPostList[j].likes < newPostList[j + 1].likes) {
-          let temp = newPostList[j].likes;
-          newPostList[j].likes = newPostList[j + 1].likes;
-          newPostList[j + 1].likes = temp;
+          let temp = newPostList[j];
+          newPostList[j] = newPostList[j + 1];
+          newPostList[j + 1] = temp;
         }
       }
     }
-    console.log(newPostList);
 
     this.setState({ masterPostList: newPostList });
   }
 
+  setColor() {
+    let newPostList = this.state.masterPostList.slice();
+    for (let i = 0; i < newPostList.length; i++) {
+      if (newPostList[i].likes > 0) {
+        return "green";
+      } else {
+        return "red";
+      }
+    }
+    this.setState({ masterPostList: newPostList });
+  }
+
   render() {
+
     return (
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' render={() => <Feed onClickDislike={this.handleAddNewDislike} onClickLike={this.handleAddNewLike} postList={this.state.masterPostList} />} />
+          <Route exact path='/' render={() => <Feed onSetColor={this.setColor} onClickDislike={this.handleAddNewDislike} onClickLike={this.handleAddNewLike} postList={this.state.masterPostList} />} />
           <Route path='/newpost' render={() => <NewPost onNewPostCreation={this.handleAddingNewPostToList} />} />
           <Route component={Error404} />
         </Switch>

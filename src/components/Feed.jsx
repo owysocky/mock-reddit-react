@@ -13,6 +13,7 @@ function Feed(props) {
       `}</style>
       {props.postList.map((post) =>
         <Post
+          onSetColor={props.onSetColor}
           onClickLike={props.onClickLike}
           onClickDislike={props.onClickDislike}
           post={post}
@@ -25,7 +26,8 @@ function Feed(props) {
 Feed.propTypes = {
   postList: PropTypes.array,
   onClickLike: PropTypes.func,
-  onClickDislike: PropTypes.func
+  onClickDislike: PropTypes.func,
+  onSetColor: PropTypes.func
 };
 
 
