@@ -9,7 +9,7 @@ function Header() {
     <div>
       <h1>Reddit</h1>
       <Link style={style} to="/">Feed</Link>
-      <Link style={style} to="/addpost">Create Post</Link>
+      <Link style={style} to="/newpost">Create Post</Link>
     </div>
 
   );

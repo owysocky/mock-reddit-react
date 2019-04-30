@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { v4 } from 'uuid';
+// import PropTypes from 'prop-types';
+// import { v4 } from 'uuid';
 
 
-function NewPost(props) {
+function NewPost() {
+
+  let _name = null;
+  let _text = null;
 
   return (
     <div>
@@ -11,6 +14,7 @@ function NewPost(props) {
   
       `}</style>
 
+      <h1>NewPOst Works</h1>
       <form>
         <h3>Create new post</h3>
         <input
@@ -32,4 +36,4 @@ function NewPost(props) {
 }
 
 
-export default NewTicketForm;
+export default NewPost;
